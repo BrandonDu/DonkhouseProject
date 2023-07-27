@@ -124,9 +124,8 @@ def download_logs():
     chrome_options = Options()
     chrome_options.add_experimental_option("prefs", prefs)
 
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()), options=chrome_options
-    )
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager(version='114.0.5735.90').install()), options=chrome_options)
+
     driver.maximize_window()
     driver.get("https://donkhouse.com/login")
 

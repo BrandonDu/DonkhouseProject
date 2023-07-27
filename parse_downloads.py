@@ -51,8 +51,9 @@ def update_players(players_dict, game_players):
 
 
 def parse_nets(ledger, info):  # ledger
-    # print(ledger)
+    print(ledger)
     table = re.search(r"(.*?)_ledger.csv", ledger).group(1)
+    print(table)
     df = pd.read_csv(
         ledger, skiprows=1, skip_blank_lines=False, usecols = ['User','In', 'Net']
     )
@@ -243,6 +244,7 @@ def parse_stats(hand_histories, prev_info, curr_info):  # hand histories
 
 
 def main():
+    # init_info()
     prev_info = load_info()
     curr_info = prev_info.copy()
     parse_nets(sys.argv[2], curr_info)
