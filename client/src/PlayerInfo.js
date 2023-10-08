@@ -5,22 +5,33 @@ import LineGraph from './LineGraph.js';
 export default function PlayerInfo() {
   const { username } = useParams();
   const player_info = useLoaderData();
-  const nets_history = JSON.parse(player_info[0].stats).nets
-  const net_dates = Object.keys(nets_history);
-  console.log(net_dates);
-  const net_nums = Object.values(nets_history);
-  for (let i = 1; i < Object.keys(nets_history).length; i++) {
-    net_nums[i] += net_nums[i - 1]
-  }
-  console.log(net_nums);
-  
   const [leaderboardOption, setLeaderboardOption] = useState('games');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gamesPerPage] = useState(10);
+  console.log(player_info);
+  if (player_info.length === 0) {
+    return <div>No games have been recorded for this username yet, tell { username } to get on donk.</div>
+  }
+  const player_info_data = JSON.parse(player_info[0]?.stats || "{}");
+  const nets_history = player_info_data.nets;
+  let net_nums;
+
+  if (nets_history && typeof nets_history === 'object') {
+    const net_dates = Object.keys(nets_history);
+    net_nums = Object.values(nets_history);
+
+    for (let i = 1; i < net_dates.length; i++) {
+      net_nums[i] += net_nums[i - 1];
+    }
+
+  } else {
+    net_nums = [];
+  }
+
   const statistics = JSON.parse(player_info[0].stats);
   const statistics_entries = Object.entries(statistics).filter(
     ([key]) => !['username', 'net', 'raised', 'nets'].includes(key)
   );
-  const [currentPage, setCurrentPage] = useState(1);
-  const [gamesPerPage] = useState(10);
 
   const handleLeaderboardToggle = (option) => {
     setLeaderboardOption(option);

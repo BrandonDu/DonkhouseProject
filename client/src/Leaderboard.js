@@ -4,8 +4,7 @@ import Select from 'react-select';
 
 export default function Leaderboard() {
     const players = useLoaderData()
-    const testtest = JSON.parse(players[0].stats).nets;
-    console.log(Object.keys(testtest).length);
+    // const testtest = JSON.parse(players[0].stats).nets;
     const [selectedOption, setSelectedOption] = useState("hello");
     const [leaderboardOption, setLeaderboardOption] = useState("biggest winners");
     const navigate = useNavigate();

@@ -80,9 +80,9 @@ def click_downloads(driver, link, stakes, table_name):
         if len(all_files) > 0:
             latest_file = max(all_files, key=os.path.getctime)
         time_counter += 0.5
-        if time_counter >= 5:
+        if time_counter >= 20:
             raise Exception(
-                f"Could not download {table_name} ledger in less than 5 seconds"
+                f"Could not download {table_name} ledger in less than 20 seconds"
             )
 
     print(latest_file)
@@ -106,9 +106,9 @@ def click_downloads(driver, link, stakes, table_name):
         if len(all_files) > 0:
             latest_file = max(all_files, key=os.path.getctime)
         time_counter += 0.5
-        if time_counter >= 5:
+        if time_counter >= 20:
             raise Exception(
-                f"Could not download {table_name} hand histories in less than 5 seconds"
+                f"Could not download {table_name} hand histories in less than 20 seconds"
             )
 
     print(latest_file)
